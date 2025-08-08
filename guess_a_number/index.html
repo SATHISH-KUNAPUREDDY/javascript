@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body,html{
+        margin-top: 5%;
+        margin-left: 20%;
+        background-color:cornsilk;
+        color: coral;
+    }
+    .clore:hover{
+        background-color: coral;
+        }
+    #user{
+        padding: 7px 10px;
+    }
+</style>
+<body>
+    <div>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeMouJnTmyGTWAUPGYMB7ISAZftyey8-yTqw&s" alt="guess image">
+        <h1>Guess a Number Between <br> 1 to 100</h1>
+        <input id="user" type="text"> <br><br>
+        <button class="clore" onclick="guessingNumber()">Guess</button>
+        <p id="message"></p>
+    </div>
+    <script>
+let randomNumber =Math.ceil(Math.random()*100)
+function guessingNumber(){
+    console.log("function is triggered...")
+
+    let currentValue=document.getElementById("user").value
+   
+    currentValue=parseInt(currentValue)
+
+    if(currentValue==randomNumber){
+        document.getElementById("message").textContent="You gussed correct number!"
+    }else if(currentValue>randomNumber){
+         document.getElementById("message").textContent="Too high Try Again!"
+    }else if(currentValue<randomNumber){
+          document.getElementById("message").textContent=" Too low Try Again!"
+    }else{
+        document.getElementById("message").textContent="please eneter a valid input"
+    }
+
+}
+    
+</script>
+</body>
+</html>

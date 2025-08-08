@@ -1,0 +1,120 @@
+Array Methods
+
+Category	  Common Methods
+Add/remove	  push, pop, shift, unshift, splice
+Access	     indexOf, includes, at
+Copy	     slice, concat, join
+Transform	 map, filter, reduce
+Search	     find, findIndex
+Sort	     sort, reverse
+Test	     every, some
+Flatten	    flat
+Loop	    forEach
+
+
+
+
+📘 JavaScript Array Methods – Deep Notes
+📌 1. Creating Arrays
+
+let fruits = ["apple", "banana", "cherry"];
+let numbers = new Array(1, 2, 3, 4);
+
+🔁 2. Looping Through Arrays
+
+for (let i = 0; i < fruits.length; i++) {
+  console.log(fruits[i]);
+}
+
+fruits.forEach((fruit, index) => {
+  console.log(index, fruit);
+});
+
+🔧 3. Mutation Methods (change original array)
+🟩 push() – Add to end
+
+fruits.push("mango"); // ["apple", "banana", "cherry", "mango"]
+🟩 pop() – Remove last item
+
+fruits.pop(); // returns "mango"
+🟩 unshift() – Add to start
+
+fruits.unshift("grape"); // ["grape", "apple", "banana", "cherry"]
+🟩 shift() – Remove from start
+
+fruits.shift(); // returns "grape"
+🟩 splice(start, deleteCount, item1, item2, ...) – Add/remove anywhere
+
+fruits.splice(1, 1, "kiwi"); // replaces index 1 with "kiwi"
+🟩 reverse() – Reverses array
+
+fruits.reverse();
+🟩 sort() – Sorts array (lexicographically by default)
+
+let nums = [40, 100, 1, 5];
+nums.sort(); // [1, 100, 40, 5] (wrong!)
+nums.sort((a, b) => a - b); // [1, 5, 40, 100]
+
+
+🔍 4. Search & Test Methods
+🔷 includes() – Check if value exists
+
+fruits.includes("banana"); // true
+🔷 indexOf() – First index of value
+
+fruits.indexOf("banana"); // 2
+🔷 lastIndexOf() – Last index of value
+
+[1, 2, 3, 2].lastIndexOf(2); // 3
+🔷 find() – Find first element that matches condition
+
+let result = nums.find(num => num > 50);
+🔷 findIndex() – Find index of first match
+
+let index = nums.findIndex(num => num > 50);
+🎭 5. Transformation Methods (return new array)
+🎨 map() – Transform each item
+
+let doubled = nums.map(n => n * 2); // [2, 10, 80, 200]
+🎨 filter() – Keep items that match condition
+
+let even = nums.filter(n => n % 2 === 0); // [40, 100]
+🎨 slice(start, end) – Copy part of array (non-mutating)
+
+let few = fruits.slice(1, 3); // ["banana", "cherry"]
+📐 6. Reduction Methods
+🧮 reduce() – Reduce array to a single value
+
+let sum = nums.reduce((acc, curr) => acc + curr, 0);
+🧪 7. Testing Conditions
+🧷 every() – All items must match
+
+nums.every(n => n > 0); // true
+🧷 some() – At least one match
+
+nums.some(n => n > 50); // true
+📋 8. Other Useful Methods
+📎 concat() – Merge arrays
+
+let merged = fruits.concat(["orange", "peach"]);
+📎 join() – Convert array to string
+
+let str = fruits.join(" - ");
+📎 flat(depth) – Flattens nested arrays
+
+let nested = [1, 2, [3, 4, [5, 6]]];
+nested.flat(2); // [1, 2, 3, 4, 5, 6]
+📎 isArray() – Check if variable is an array
+
+Array.isArray(fruits); // true
+💡 Common Interview Practices
+
+// Remove duplicates
+let arr = [1, 2, 2, 3];
+let unique = [...new Set(arr)];
+
+// Sum of array
+let sum = arr.reduce((a, b) => a + b, 0);
+
+// Sort descending
+arr.sort((a, b) => b - a);

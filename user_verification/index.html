@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,body{
+            margin-top: 8%;
+            margin-left: 25%;
+            background-color:lightblue;
+        }
+        #btn{
+            background-color:orange;
+            color: azure;
+            padding: 12px 24px;
+            text-align: center;
+        }
+        #btn:hover{
+             background-color: azure;
+             color: black;
+        }
+        #name{
+            padding: 10px 24px;
+    
+        }
+        #password{
+            padding: 10px 24px; 
+        }
+    </style>
+</head>
+<body>
+  <div>
+      <h1 id="heading">User Login Form</h1><br>
+      <input id="name" type="text"><br><br>
+      <input id="password" type="password"><br><br>
+      <button id="btn" onclick="verifying()">submit</button><br><br>
+      <p id="status"></p>
+  </div>
+    <script src="./script.js"></script>
+</body>
+</html>

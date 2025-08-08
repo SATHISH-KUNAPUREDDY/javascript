@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mini Calculator</title>
+</head>
+<style>
+   *{
+    background-color: antiquewhite;
+    text-align: center;
+   }
+</style>
+<body>
+  <h2>Mini Calculator</h2>
+  
+  <input type="number" id="num1" placeholder="Enter first number" /><br><br>
+  <input type="number" id="num2" placeholder="Enter second number" /><br><br>
+
+  <button onclick="calculate('add')">➕ Add </button><br><br>
+  <button onclick="calculate('subtract')">➖ Subtract</button><br><br>
+  <button onclick="calculate('multiply')">✖ Multiply</button><br><br>
+  <button onclick="calculate('divide')">➗ Divide</button><br>
+
+  <h3 id="result">Result: </h3>
+
+  <script src="var.js"></script>
+</body>
+</html>
