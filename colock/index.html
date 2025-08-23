@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Countdown + Blink</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: black;
+      font-family: monospace;
+      color: white;
+      gap: 20px;
+      transition: background 0.3s;
+    }
+    #countdown {
+      font-size: 3rem;
+      padding: 15px 30px;
+      border: 2px solid white;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      font-size: 1.2rem;
+      border: 2px solid white;
+      border-radius: 8px;
+      text-align: center;
+      width: 120px;
+      background:white;
+      color: black;
+    }
+    .btn-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      padding: 12px 30px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+    }
+    #startBtn { background: limegreen; }
+    #stopBtn { background: crimson; }
+    #timesUp {
+      display: none;
+      font-size: 5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input type="number" id="timeInput" placeholder="Seconds" min="1"><br><br>
+    <div id="countdown">Countdown: 0</div><br><br>
+    <div class="btn-group">
+      <button id="startBtn">Start</button>
+      <button id="stopBtn">Stop</button>
+    </div>
+  </div>
+
+  <div id="timesUp"> TIME'S UP!</div>
+
+  <script>
+    let countdownInterval;
+    let blinkInterval;
+    let countdownValue = 0;
+    let isRed = false;
+
+    document.getElementById("startBtn").addEventListener("click", () => {
+      stopAll(); 
+      countdownValue = parseInt(document.getElementById("timeInput").value) || 0;
+      if (countdownValue <= 0) {
+        alert("Please enter a valid number of seconds!");
+        return;
+      }
+      document.getElementById("countdown").textContent = "Countdown: " + countdownValue;
+
+      countdownInterval = setInterval(() => {
+        countdownValue--;
+        if (countdownValue >= 0) {
+          document.getElementById("countdown").textContent = "Countdown: " + countdownValue;
+        } else {
+          stopAll();
+          document.getElementById("app").style.display = "none";
+          document.getElementById("timesUp").style.display = "block";
+        }
+      }, 1000);
+
+      blinkInterval = setInterval(() => {
+        document.body.style.background = isRed ? "white" : "red";
+        isRed = !isRed;
+      }, 1000);
+    });
+
+    document.getElementById("stopBtn").addEventListener("click", () => {
+      stopAll();
+    });
+
+    function stopAll() {
+      clearInterval(countdownInterval);
+      clearInterval(blinkInterval);
+      countdownInterval = null;
+      blinkInterval = null;
+      document.getElementById("countdown").textContent = "Countdown: 0";
+      document.body.style.background = "black";
+      isRed = false;
+      document.getElementById("app").style.display = "block";
+      document.getElementById("timesUp").style.display = "none";
+    }
+  </script>
+</body>
+</html>
