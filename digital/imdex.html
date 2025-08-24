@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Clockapp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    #app {
+      text-align: center;
+      background: #222;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,255,255,0.5);
+      width: 350px;
+    }
+    .mode-buttons {
+      margin-bottom: 20px;
+    }
+    button {
+      background: #00bcd4;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      color: #fff;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #0097a7;
+    }
+    input {
+      padding: 8px;
+      border-radius: 6px;
+      border: 2px solid #00bcd4;
+      text-align: center;
+      width: 80px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    #clockDisplay, #countdownDisplay, #stopwatchDisplay {
+      font-size: 28px;
+      margin: 15px 0;
+      font-weight: bold;
+      color: #0ff;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+
+    <div class="mode-buttons">
+      <button onclick="showMode('clock')">Digital Clock</button>
+      <button onclick="showMode('countdown')">Countdown</button>
+      <button onclick="showMode('stopwatch')">Stopwatch</button>
+    </div>
+
+    <div id="clock" class="mode">
+      <h2>Digital Clock</h2>
+      <div id="clockDisplay">--:--:--</div>
+    </div>
+
+
+    <div id="countdown" class="mode" style="display:none;">
+      <h2>Countdown Timer</h2>
+      <input type="number" id="countdownInput" placeholder="Seconds">
+      <div id="countdownDisplay">0</div>
+      <button onclick="startCountdown()">Start</button>
+      <button onclick="stopCountdown()">Stop</button>
+      <button onclick="resetCountdown()">Reset</button>
+    </div>
+
+    <div id="stopwatch" class="mode" style="display:none;">
+      <h2>Stopwatch</h2>
+      <div id="stopwatchDisplay">00:00:00</div>
+      <button onclick="startStopwatch()">Start</button>
+      <button onclick="stopStopwatch()">Stop</button>
+      <button onclick="resetStopwatch()">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    let clockInterval, countdownInterval, stopwatchInterval;
+    let countdownValue = 0;
+    let stopwatchSeconds = 0;
+
+    function showMode(mode) {
+      document.querySelectorAll(".mode").forEach(div => div.style.display = "none");
+      document.getElementById(mode).style.display = "block";
+    }
+
+    function startClock() {
+      clockInterval = setInterval(() => {
+        const now = new Date();
+        const time = now.toLocaleTimeString();
+        document.getElementById("clockDisplay").textContent = time;
+      }, 1000);
+    }
+    startClock();
+
+
+    function startCountdown() {
+      stopCountdown();
+      countdownValue = parseInt(document.getElementById("countdownInput").value) || 0;
+      document.getElementById("countdownDisplay").textContent = countdownValue;
+
+      countdownInterval = setInterval(() => {
+        if (countdownValue > 0) {
+          countdownValue--;
+          document.getElementById("countdownDisplay").textContent = countdownValue;
+        } else {
+          clearInterval(countdownInterval);
+          document.body.innerHTML = "<h1 style='color:red; font-size:50px; text-align:center;'> Time's Up!</h1>";
+        }
+      }, 1000);
+    }
+    function stopCountdown() {
+      clearInterval(countdownInterval);
+    }
+    function resetCountdown() {
+      stopCountdown();
+      countdownValue = 0;
+      document.getElementById("countdownDisplay").textContent = 0;
+    }
+
+    function startStopwatch() {
+      stopStopwatch();
+      stopwatchInterval = setInterval(() => {
+        stopwatchSeconds++;
+        let hrs = String(Math.floor(stopwatchSeconds / 3600)).padStart(2, "0");
+        let mins = String(Math.floor((stopwatchSeconds % 3600) / 60)).padStart(2, "0");
+        let secs = String(stopwatchSeconds % 60).padStart(2, "0");
+        document.getElementById("stopwatchDisplay").textContent = `${hrs}:${mins}:${secs}`;
+      }, 1000);
+    }
+    function stopStopwatch() {
+      clearInterval(stopwatchInterval);
+    }
+    function resetStopwatch() {
+      stopStopwatch();
+      stopwatchSeconds = 0;
+      document.getElementById("stopwatchDisplay").textContent = "00:00:00";
+    }
+  </script>
+</body>
+</html>
