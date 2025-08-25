@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login • Light/Dark Toggle</title>
+    <style>
+      :root {
+        --bg: #f6f7fb;
+        --card-bg: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --primary: #4f46e5;
+        --primary-foreground: #ffffff;
+        --border: #e5e7eb;
+        --ring: rgba(79, 70, 229, 0.35);
+        --error: #dc2626;
+        --success: #16a34a;
+        --input-bg: #ffffff;
+        --shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+      }
+      [data-theme="dark"] {
+        --bg: #0b1220;
+        --card-bg: #0f172a;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --primary: #818cf8;
+        --primary-foreground: #0b1220;
+        --border: #1f2937;
+        --ring: rgba(129, 140, 248, 0.35);
+        --error: #f87171;
+        --success: #34d399;
+        --input-bg: #0b1220;
+        --shadow: 0 10px 30px rgba(2, 6, 23, 0.5);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html, body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: radial-gradient(1200px 600px at 80% -10%, var(--ring), transparent 60%) ,
+                    radial-gradient(900px 500px at -10% 110%, var(--ring), transparent 60%),
+                    var(--bg);
+        color: var(--text);
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 440px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .6rem;
+        margin-bottom: 1rem;
+        user-select: none;
+      }
+      .brand__logo {
+        width: 40px; height: 40px; border-radius: 12px;
+        background: linear-gradient(135deg, var(--primary), #22d3ee);
+        display: grid; place-items: center;
+        color: var(--primary-foreground);
+        font-weight: 700;
+        box-shadow: var(--shadow);
+      }
+      .brand__name { font-weight: 700; letter-spacing: .2px; }
+
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card__header {
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: .5rem;
+      }
+
+      .title { font-size: 1.3rem; margin: 0; }
+      .subtitle { color: var(--muted); margin: 0 0 1rem; font-size: .95rem; }
+
+      .theme-toggle {
+        display: inline-flex; align-items: center; gap: .5rem;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: .35rem .6rem;
+        background: var(--card-bg);
+        cursor: pointer;
+        transition: transform .08s ease;
+      }
+      .theme-toggle:active { transform: scale(.98); }
+      .theme-toggle__icon { width: 18px; height: 18px; }
+
+      .field { margin: .8rem 0; }
+      label { display: block; margin-bottom: .4rem; font-weight: 600; font-size: .9rem; }
+      .input {
+        width: 100%;
+        background: var(--input-bg);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: .8rem .9rem;
+        outline: none;
+        transition: box-shadow .2s, border-color .2s;
+      }
+      .input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px var(--ring);
+      }
+
+      .input-row { position: relative; }
+      .password-toggle {
+        position: absolute; right: .5rem; top: 50%; transform: translateY(-50%);
+        border: none; background: transparent; cursor: pointer;
+        padding: .3rem; border-radius: 8px; line-height: 0;
+      }
+      .password-toggle:focus-visible {
+        outline: 2px solid var(--primary); outline-offset: 2px;
+      }
+
+      .helper {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: .5rem; margin: .4rem 0 1rem; font-size: .9rem; color: var(--muted);
+      }
+      .helper a { color: var(--primary); text-decoration: none; }
+      .helper a:hover { text-decoration: underline; }
+
+      .actions { display: grid; gap: .6rem; }
+      .btn {
+        appearance: none; border: none; cursor: pointer;
+        border-radius: 12px; padding: .85rem 1rem; font-weight: 700;
+        background: var(--primary); color: var(--primary-foreground);
+        transition: transform .08s ease, filter .2s ease;
+      }
+      .btn:hover { filter: brightness(1.05); }
+      .btn:active { transform: translateY(1px); }
+
+      .error { color: var(--error); font-size: .9rem; min-height: 1.2em; }
+      .success { color: var(--success); font-size: .95rem; text-align: center; }
+
+      .divider { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: .6rem; margin: .8rem 0; color: var(--muted); font-size: .9rem; }
+      .divider::before, .divider::after { content: ""; height: 1px; background: var(--border); }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .card { animation: fadeUp .45s ease both; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(8px);} to { opacity: 1; transform: translateY(0);} }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" role="main">
+      <div class="brand" aria-hidden="true">
+        <div class="brand__name">LOGIN FORM</div>
+      </div>
+
+      <section class="card" aria-labelledby="login-title">
+        <header class="card__header">
+          <h1 id="login-title" class="title">Welcome back</h1>
+          <button id="themeToggle" class="theme-toggle" aria-pressed="false" title="Toggle light/dark theme">
+            <svg class="theme-toggle__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.64 13A9 9 0 1 1 11 2.36 7 7 0 1 0 21.64 13z"/></svg>
+            <span id="themeLabel">Light</span>
+          </button>
+        </header>
+        <p class="subtitle">Sign in to continue to your dashboard</p>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" class="input" placeholder="you@example.com" autocomplete="username" required />
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <div class="input-row">
+              <input id="password" name="password" type="password" class="input" placeholder="" autocomplete="current-password" minlength="6" required />
+              <button type="button" id="passwordToggle" class="password-toggle" aria-label="Show password" title="Show/Hide password">
+               <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="helper">
+            <label><input type="checkbox" id="remember" /> Remember me</label>
+            <a href="#" onclick="event.preventDefault()">Forgot password?</a>
+          </div>
+
+          <div class="error" id="error"></div>
+
+          <div class="actions">
+            <button class="btn" type="submit">Sign in</button>
+          </div>
+
+         
+
+          <p class="success" id="success" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </div>
+
+    <script>
+
+      const root = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const themeLabel = document.getElementById('themeLabel');
+
+      function applyTheme(theme) {
+        root.setAttribute('data-theme', theme);
+        const isDark = theme === 'dark';
+        themeToggle.setAttribute('aria-pressed', String(isDark));
+        themeLabel.textContent = isDark ? 'Dark' : 'Light';
+        localStorage.setItem('theme', theme);
+      }
+
+      (function initTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light' || saved === 'dark') {
+          applyTheme(saved);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          applyTheme('dark');
+        } else {
+          applyTheme('light');
+        }
+      })();
+
+      themeToggle.addEventListener('click', () => {
+        const current = root.getAttribute('data-theme');
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      const pwdInput = document.getElementById('password');
+      const pwdToggle = document.getElementById('passwordToggle');
+      const eyeIcon = document.getElementById('eyeIcon');
+
+      function toEyeSlash() {
+        eyeIcon.outerHTML = `
+        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a21.77 21.77 0 0 1 5.06-6.94"></path>
+          <path d="M1 1l22 22"></path>
+        </svg>`;
+      }
+      function toEye() {
+        eyeIcon.outerHTML = `
+        <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>`;
+      }
+
+      pwdToggle.addEventListener('click', () => {
+        const visible = pwdInput.type === 'text';
+        pwdInput.type = visible ? 'password' : 'text';
+        if (visible) { toEye(); } else { toEyeSlash(); }
+        pwdToggle.setAttribute('aria-label', visible ? 'Show password' : 'Hide password');
+      });
+
+      const form = document.getElementById('loginForm');
+      const email = document.getElementById('email');
+      const error = document.getElementById('error');
+      const success = document.getElementById('success');
+      const magic = document.getElementById('magicLink');
+
+      function showError(msg) {
+        error.textContent = msg;
+        success.textContent = '';
+      }
+      function showSuccess(msg) {
+        success.textContent = msg;
+        error.textContent = '';
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emailVal = email.value.trim();
+        const pwdVal = pwdInput.value;
+
+        if (!emailVal) return showError('Please enter your email.');
+    
+        showSuccess('Signed ');
+
+      
+        if (document.getElementById('remember').checked) {
+          localStorage.setItem('rememberEmail', emailVal);
+        } else {
+          localStorage.removeItem('rememberEmail');
+        }
+      });
+
+
+      (function prefillEmail() {
+        const remembered = localStorage.getItem('rememberEmail');
+        if (remembered) email.value = remembered;
+      })();
+    </script>
+  </body>
+</html>
