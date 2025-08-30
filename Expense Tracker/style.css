@@ -1,0 +1,100 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  background: #fff;
+  padding: 20px;
+  width: 350px;
+  border-radius: 30px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+h2, h3 {
+  text-align: center;
+}
+
+.balance {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.income, .expense {
+  width: 45%;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.income {
+  background: #d4edda;
+  color: #155724;
+}
+
+.expense {
+  background: #f8d7da;
+  color: #c01c2d;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+}
+
+.list li {
+  display: flex;
+  justify-content: space-between;
+  background: #eee;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+}
+
+.list li.plus {
+  border-right: 5px solid #2ecc71;
+}
+
+.list li.minus {
+  border-right: 5px solid #e74c3c;
+}
+
+button {
+  width: 10%;
+  padding: 10px;
+  border: none;
+  background: #2ecc71;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #27ae60;
+}
+
+#b1{
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #2ecc71;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#b1:hover{
+    background-color: #27ae60;
+}
