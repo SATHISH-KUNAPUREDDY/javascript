@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+   body {
+  font-family: Arial, sans-serif;
+  background: url('https://www.athletico.in/wp-content/uploads/2023/09/Understanding-Your-BMI-A-Guide-to-Reading-a-BMI-Chart-1024x512.jpeg') no-repeat center center/cover;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  backdrop-filter: blur(3px); 
+}
+    h1 {
+      margin-bottom: 20px;
+      color:green;
+    }
+    .card {
+      background: #fff;
+      color: #333;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      background: orange;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #1c5dba;
+    }
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    .progress-bar {
+      margin-top: 15px;
+      height: 20px;
+      width: 100%;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress {
+      height: 100%;
+      width: 0;
+      background: green;
+      transition: width 0.5s ease-in-out;
+    }
+    .history {
+      margin-top: 20px;
+      text-align: left;
+      font-size: 14px;
+    }
+    .history ul {
+      padding: 0;
+      list-style: none;
+    }
+    .history li {
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1> BMI Calculator </h1>
+  <div class="card">
+    <input type="number" id="weight" placeholder="Enter weight (kg)">
+    <input type="number" id="height" placeholder="Enter height (cm)">
+    <button onclick="calculateBMI()">Calculate</button>
+    <button onclick="resetBMI()">Reset</button>
+    <div class="result" id="result"></div>
+
+    <div class="progress-bar">
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="history">
+      <h3>History</h3>
+      <ul id="historyList"></ul>
+      <button onclick="clearHistory()">Clear History</button>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
