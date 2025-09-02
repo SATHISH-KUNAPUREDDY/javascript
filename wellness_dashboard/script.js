@@ -145,4 +145,44 @@ birthDateInput.addEventListener('change', calculateAge);
             const today = new Date();
             birthDateInput.max = today.toISOString().split("T")[0];
 
+
+            // Mood Tracker
+const moodSelect = document.getElementById('moodSelect');
+const moodHistory = document.getElementById('moodHistory');
+
+document.getElementById('saveMood').addEventListener('click', () => {
+    const mood = moodSelect.value;
+    if (!mood) return;
+
+    const date = new Date().toLocaleDateString();
+    const entry = document.createElement('li');
+    entry.textContent = `${date}: ${mood}`;
+    moodHistory.appendChild(entry);
+});
+
+// Steps Counter
+const stepsInput = document.getElementById('stepsInput');
+const stepsProgress = document.getElementById('stepsProgress');
+const stepsTarget = 10000;
+
+document.getElementById('saveSteps').addEventListener('click', () => {
+    const steps = parseInt(stepsInput.value, 10) || 0;
+    const percent = Math.min((steps / stepsTarget) * 100, 100);
+    stepsProgress.style.width = percent + "%";
+    stepsProgress.textContent = steps + " steps";
+});
+
+// Water Intake Tracker
+const waterInput = document.getElementById('waterInput');
+const waterProgress = document.getElementById('waterProgress');
+const totalGlasses = 8; // 8 glasses = 2L
+
+document.getElementById('saveWater').addEventListener('click', () => {
+    const glasses = parseInt(waterInput.value, 10) || 0;
+    const percent = Math.min((glasses / totalGlasses) * 100, 100);
+    waterProgress.style.width = percent + "%";
+    waterProgress.textContent = glasses + " / " + totalGlasses + " glasses";
+});
+
+
         });

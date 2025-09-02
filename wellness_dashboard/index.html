@@ -97,6 +97,108 @@
         input[type="date"]::-webkit-calendar-picker-indicator {
             filter: invert(1);
         }
+        
+.tracker-section {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.tracker-section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.tracker-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: var(--primary-color-light);
+}
+
+.tracker-section input,
+.tracker-section select {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  margin-bottom: 0.75rem;
+  transition: border 0.2s, background 0.2s;
+}
+
+.tracker-section input:focus,
+.tracker-section select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.tracker-section button {
+  background: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.tracker-section button:hover {
+  background: var(--primary-color-light);
+  transform: scale(1.05);
+}
+
+
+.progress-container {
+  background: rgba(255, 255, 255, 0.15);
+  width: 100%;
+  height: 25px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.progress-bar {
+  height: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 25px;
+  color: white;
+  border-radius: 12px;
+  transition: width 0.5s ease;
+}
+
+#stepsProgress {
+  background: #2ecc71; 
+}
+
+#waterProgress {
+  background: #3498db; 
+}
+
+#moodHistory {
+  margin-top: 0.75rem;
+  list-style: none;
+  padding: 0;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+#moodHistory li {
+  padding: 0.4rem 0.6rem;
+  margin-bottom: 0.4rem;
+  border-radius: 0.4rem;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.9rem;
+}
+
+
     </style>
 </head>
 <body class="text-white min-h-screen flex items-center justify-center p-4">
@@ -162,6 +264,41 @@
                         </div>
                     </div>
                 </div>
+          
+<section class="tracker-section">
+  <h3>Mood Tracker</h3>
+  <select id="moodSelect">
+    <option value="">Select Mood</option>
+    <option value="😊 Happy">😊 Happy</option>
+    <option value="😐 Neutral">😐 Neutral</option>
+    <option value="😢 Sad">😢 Sad</option>
+    <option value="😡 Angry">😡 Angry</option>
+  </select>
+  <button id="saveMood">Save Mood</button>
+  <ul id="moodHistory"></ul>
+</section>
+
+<!-- Steps Counter -->
+<section class="tracker-section">
+  <h3>Steps Counter</h3>
+  <input type="number" id="stepsInput" placeholder="Enter steps">
+  <button id="saveSteps">Save Steps</button>
+  <div class="progress-container">
+    <div id="stepsProgress" class="progress-bar"></div>
+  </div>
+</section>
+
+<!-- Water Intake Tracker -->
+<section class="tracker-section">
+  <h3>Water Intake Tracker</h3>
+  <input type="number" id="waterInput" placeholder="Glasses (250ml each)">
+  <button id="saveWater">Save Water</button>
+  <div class="progress-container">
+    <div id="waterProgress" class="progress-bar"></div>
+  </div>
+</section>
+
+
             </div>
 
     </main>
