@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e1a926, #e7e0e0);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #fff;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+
+    #searchBox {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto;
+      max-width: 600px;
+      background: #fff;
+      padding: 10px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    input {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 18px;
+      margin-left: 10px;
+      border: none;
+      background: #ff6b6b;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #ff4757;
+      transform: scale(1.05);
+    }
+
+    #results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .recipe {
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .recipe:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    .recipe img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .recipe h3 {
+      margin: 15px 0 10px;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .recipe a {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 14px;
+      text-decoration: none;
+      background: #1e90ff;
+      color: white;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      transition: background 0.3s ease;
+    }
+
+    .recipe a:hover {
+      background: #0074e4;
+    }
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #ff6b6b;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 40px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1> Recipe Finder</h1>
+  <div id="searchBox">
+    <input type="text" id="ingredients" placeholder="Enter ingredients (e.g. chicken, tomato)">
+    <button id="searchBtn">Find Recipes</button>
+  </div>
+  <div id="results"></div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
