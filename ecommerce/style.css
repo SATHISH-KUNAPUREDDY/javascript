@@ -1,0 +1,113 @@
+body { 
+    font-family: Arial, sans-serif; 
+    margin:0; padding:0; 
+    background-color:#EEEEEE;
+}
+header { 
+    background:#1E90FF;
+    color:#fff; 
+    padding:12px 20px; 
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center; 
+}
+header h1 {
+     font-size:20px; margin:0; 
+}
+header input { 
+    padding:6px 10px; 
+    border-radius:6px; 
+    border:1px solid #ccc; 
+}
+#products { 
+    display:grid; 
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); 
+    gap:20px; 
+    padding:20px; 
+}
+.product {
+  background:#fff;
+  border-radius:12px;
+  padding:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.1);
+  display:flex;
+  flex-direction:column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.product:hover {
+  transform: translateY(-6px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  background: #2563eb;
+}
+.product img {
+  width:100%;
+  height:160px;
+  object-fit:contain;
+  border-radius:8px;
+  background:#f3f4f6;
+  transition: transform 0.3s ease;
+}
+.product:hover img { 
+    transform: scale(1.05); 
+}
+.product strong { font-size:16px; }
+.product .price { font-weight:bold; color:black; }
+
+.btn {
+  padding:6px 10px;
+  border:0;
+  border-radius:8px;
+  cursor:pointer;
+  background:#FF6F00;
+  color:white;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+.btn:hover {
+  background:#5cec28;
+  transform: scale(1.05);
+}
+.product .wishlist {
+  position: absolute; top:10px; right:10px; background:transparent; border:none; font-size:20px; cursor:pointer; color:#ef4444;
+}
+#cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100%;
+  background: #fff;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+#cart.open { transform: translateX(0); }
+#cart h2 { margin:0; padding:16px; border-bottom:1px solid #eee; }
+#cartItems { flex:1; overflow-y:auto; padding:16px; }
+#cart footer { padding:16px; border-top:1px solid #eee; background:#fafafa; }
+
+#cartOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+  z-index: 900;
+}
+
+#modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1100;
+}
+#modal .box {
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  width:300px;
+  text-align:center;
+}

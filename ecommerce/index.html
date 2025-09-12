@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Demo Store</h1>
+    <div style="display:flex; gap:12px; align-items:center">
+      <input type="text" id="search" placeholder="Search products...">
+      <select id="categoryFilter" class="btn">
+        <option value="all">All Categories</option>
+      </select>
+      <select id="sortProducts" class="btn">
+        <option value="default">Sort By</option>
+        <option value="price-asc">Price: Low → High</option>
+        <option value="price-desc">Price: High → Low</option>
+        <option value="title-asc">Alphabetical A → Z</option>
+        <option value="title-desc">Alphabetical Z → A</option>
+      </select>
+      <button id="toggleCart" class="btn">Cart (<span id="cartCount">0</span>)</button>
+    </div>
+  </header>
+
+  <main id="products"></main>
+
+  <div id="cart">
+    <h2>Your Cart</h2>
+    <button id="closeCart" class="btn" style="background:#ef4444; margin:10px;">Close</button>
+    <div id="cartItems"></div>
+    <footer>
+      <div>Subtotal: <span id="subtotal">$0.00</span></div>
+      <div>Tax: <span id="tax">$0.00</span></div>
+      <div>Total: <span id="total">$0.00</span></div>
+      <div class="checkout" style="margin-top:12px; display:flex; gap:10px; justify-content:space-between;">
+        <button id="clearCart" class="btn" style="background:#f87171;">Clear</button>
+        <button id="checkoutBtn" class="btn">Pay</button>
+      </div>
+    </footer>
+  </div>
+
+  <div id="cartOverlay"></div>
+
+  <div id="modal">
+    <div class="box">
+      <h3>Checkout</h3>
+      <p>Proceed with demo payment?</p>
+      <button id="payBtn" class="btn">Pay</button>
+      <button id="cancelPay" class="btn" style="background:#9ca3af;margin-left:10px;">Cancel</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
